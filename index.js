@@ -1,4 +1,3 @@
-console.log('My Magic Notes here.');
 showNotes();
 
 //If user add some note
@@ -21,7 +20,6 @@ addBtn.addEventListener('click', function (e) {
     localStorage.setItem('notes', JSON.stringify(notesObj));
     addTxt.value = "";
     addTitle.value = "";
-    // console.log(notesObj);
     showNotes();
 })
 
@@ -51,14 +49,13 @@ function showNotes() {
         notesElm.innerHTML = html;
     }
     else {
-         notesElm.innerHTML = `Nothing to show ! <br>
-        "Add a Note" section above to notes.`;        
+        notesElm.innerHTML = `Nothing to show ! <br>
+        "Add a Note" section above to notes.`;
     }
 }
 
 // Function to delete a notes
 function deleteNote(index) {
-    // console.log("I am Delete");
     let notes = localStorage.getItem('notes');
     if (notes === null) {
         notesObj = [];
@@ -74,20 +71,22 @@ function deleteNote(index) {
 }
 
 //Search
-search = document.getElementById('searchTxt')
-search.addEventListener('input', function () {
+let search = document.getElementById('searchTxt');
+let noteCards = document.getElementsByClassName('noteCard');
+search.addEventListener('input', function (event) {
+    const { value } = event.target;
 
     let inputVal = search.value.toLowerCase();
-    // console.log('Input event fired!', inputVal);
-    let noteCards = document.getElementsByClassName('noteCard');
-    Array.from(noteCards).forEach(function (element) {
-        let cardTxt = element.getElementsByTagName("p")[0].innerText;
-        // console.log(cardTxt);
-        if (cardTxt.includes(inputVal)) {
-            element.style.display = 'block';
+
+    for(const element of noteCards){
+        let cardTxt = element.textContent.toLowerCase();
+
+        if(cardTxt.includes(inputVal)){
+            element.style.display = "block";
+        }else{
+            element.style.display = "none";
         }
-        else {
-            element.style.display = 'none';
-        }
-    })
+
+    }
+   
 })
