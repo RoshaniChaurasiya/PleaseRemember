@@ -41,7 +41,7 @@ function showNotes() {
         <div class="card-body">
             <h5 class="card-title">Note ${element.title}</h5>
             <p class="card-text"> ${element.text}</p>
-            <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete Note</button>
+            <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-danger">Delete Note</button>
         </div>
     </div>`;
     });
@@ -51,7 +51,9 @@ function showNotes() {
         notesElm.innerHTML = html;
     }
     else {
-        notesElm.innerHTML = `Nothing to show!"Add a Note" section above to notes.`;
+         notesElm.innerHTML = `Nothing to show ! <br>
+        "Add a Note" section above to notes.`;
+        notesElm.style.color = "red"
     }
 }
 
